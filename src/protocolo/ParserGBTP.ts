@@ -4,8 +4,7 @@ import { GBTPResponse } from "./GBTPResponse";
 export class ParserGBTP {
 
     public static montarMensagem(req: GBTPRequest): string {
-        return `
-OPERATION:${req.operation}
+        return `OPERATION:${req.operation}
 ACCOUNT_ID:${req.accountId}
 TO_ACCOUNT_ID:${req.toAccountId}
 VALUE:${req.value}
@@ -19,8 +18,14 @@ VALUE:${req.value}
         const dados: any = {};
 
         linhas.forEach(linha => {
-            const [chave, valor] = linha.split(':');
-            dados[chave!] = valor;
+            const index = linha.indexOf(':');
+            console.log(linha)
+
+            if (index !== -1) {
+                const chave = linha.substring(0, index).trim();
+                const valor = linha.substring(index + 1).trim();
+                dados[chave] = valor;
+            }
         });
 
         return {

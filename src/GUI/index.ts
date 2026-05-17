@@ -1,4 +1,4 @@
-import { BancoService } from "../RegrasNegocio/bancoService";
+import { BancoService } from "../RegrasNegocio/BancoService";
 import { GBTPResponse } from "../protocolo/GBTPResponse";
 
 export class Index {
@@ -84,10 +84,29 @@ export class Index {
 
         if (!resultado) return;
 
+        const isSucesso = String(resposta.status).toUpperCase() === 'OK';
+        const icone = isSucesso ? '✅' : '⚠️';
+        const titulo = isSucesso ? 'Transação Concluída' : 'Atenção';
+
         resultado.innerHTML = `
-            <p><strong>Status:</strong> ${resposta.status}</p>
-            <p><strong>Mensagem:</strong> ${resposta.message}</p>
-            <p><strong>Saldo:</strong> ${resposta.balance}</p>
+            <div style="border: 3px solid #031221; background: #ffffff; padding: 25px 20px; box-shadow: 6px 6px 0px #031221; color: #031221; text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 10px; line-height: 1;">${icone}</div>
+                
+                <h3 style="margin-bottom: 10px; font-weight: 900; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                    ${titulo}
+                </h3>
+                
+                <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 25px; line-height: 1.5; color: #1a3c5a;">
+                    ${resposta.message}
+                </p>
+                
+                <div style="border-top: 3px dashed #031221; padding-top: 20px;">
+                    <div style="text-transform: uppercase; font-weight: 900; font-size: 0.85rem; margin-bottom: 10px;">Saldo Disponível</div>
+                    <div style="font-weight: 900; font-size: 1.5rem; background: #031221; color: #ffffff; padding: 10px 20px; display: inline-block; box-shadow: 3px 3px 0px rgba(3, 18, 33, 0.2);">
+                        R$ ${resposta.balance}
+                    </div>
+                </div>
+            </div>
         `;
     }
 }

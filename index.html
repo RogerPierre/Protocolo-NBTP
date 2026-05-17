@@ -4,64 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banco Neo</title>
+    <title>Gabio Banco</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: #f4f6f8;
+            background-color: #e8eef3;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.15'/%3E%3Cpath d='M50 0 L100 100 L0 100 Z' fill='rgba(4, 26, 47, 0.03)' stroke='rgba(4, 26, 47, 0.05)' stroke-width='1'/%3E%3Cpath d='M0 0 L50 100 L100 0 Z' fill='rgba(4, 26, 47, 0.02)' stroke='rgba(4, 26, 47, 0.05)' stroke-width='1'/%3E%3C/svg%3E");
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: #031221;
         }
 
         .container {
-            background: white;
+            background: #ffffff;
             width: 90%;
             max-width: 500px;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 35px;
+            border-radius: 0px;
+            border: 3px solid #031221;
+            box-shadow: 8px 8px 0px rgba(3, 18, 33, 0.15);
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 30px;
-            color: #0a4d68;
+            margin-bottom: 25px;
+            color: #031221;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
         }
 
         .saudacao {
-            background: #0a4d68;
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
+            background: #f0f4f8;
+            color: #031221;
+            padding: 20px;
+            border: 2px solid #031221;
             text-align: center;
             margin-bottom: 25px;
+            box-shadow: 4px 4px 0px rgba(3, 18, 33, 0.1);
+        }
+
+        .saudacao p {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #1a3c5a;
         }
 
         .saudacao h2 {
-            margin-top: 10px;
+            margin-top: 5px;
             font-size: 1.8rem;
+            font-weight: 800;
         }
 
         .inputs {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .inputs input {
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+            padding: 15px;
+            border: 2px solid #031221;
+            background: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #031221;
+            transition: all 0.2s;
+        }
+
+        .inputs input::placeholder {
+            color: #7b93a8;
+            font-weight: 600;
+        }
+
+        .inputs input:focus {
+            outline: none;
+            background: #e8eef3;
+            box-shadow: 4px 4px 0px rgba(3, 18, 33, 0.1);
         }
 
         .acoes {
@@ -72,25 +104,38 @@
 
         .botao {
             background: #ffffff;
-            border: 2px solid #0a4d68;
-            color: #0a4d68;
-            padding: 18px;
-            border-radius: 10px;
+            border: 2px solid #031221;
+            color: #031221;
+            padding: 16px;
             cursor: pointer;
             font-size: 1rem;
-            transition: 0.3s;
+            font-weight: 800;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            box-shadow: 4px 4px 0px rgba(3, 18, 33, 0.2);
         }
 
         .botao:hover {
-            background: #0a4d68;
-            color: white;
+            background: #031221;
+            color: #ffffff;
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px rgba(3, 18, 33, 0.2);
+        }
+
+        .botao:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px rgba(3, 18, 33, 0.2);
         }
 
         #resultado {
             margin-top: 25px;
-            background: #f1f1f1;
-            padding: 15px;
-            border-radius: 10px;
+            background: #f0f4f8;
+            padding: 20px;
+            border: 2px solid #031221;
+            box-shadow: 4px 4px 0px rgba(3, 18, 33, 0.1);
+            color: #031221;
+            font-weight: 700;
+            line-height: 1.6;
         }
 
     </style>
@@ -101,11 +146,10 @@
 
     <div class="container">
 
-        <h1>Banco Neo</h1>
+        <h1>Gabio Bank</h1>
 
         <div class="saudacao">
             <p>Bem-vindo de volta</p>
-            <h2>Olá, Cliente 👋</h2>
         </div>
 
         <div class="inputs">

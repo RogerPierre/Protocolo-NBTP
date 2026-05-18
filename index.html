@@ -4,199 +4,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabio Banco</title>
-
+    <title>Gabio Bank | Digital Banking</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #22c55e;
+            --error: #ef4444;
+            --input-bg: #0f172a;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background-color: #e8eef3;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.15'/%3E%3Cpath d='M50 0 L100 100 L0 100 Z' fill='rgba(4, 26, 47, 0.03)' stroke='rgba(4, 26, 47, 0.05)' stroke-width='1'/%3E%3Cpath d='M0 0 L50 100 L100 0 Z' fill='rgba(4, 26, 47, 0.02)' stroke='rgba(4, 26, 47, 0.05)' stroke-width='1'/%3E%3C/svg%3E");
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            color: #031221;
+            padding: 20px;
         }
 
-        .container {
-            background: #ffffff;
-            width: 90%;
-            max-width: 500px;
-            padding: 35px;
-            border-radius: 0px;
-            border: 3px solid #031221;
-            box-shadow: 8px 8px 0px rgba(3, 18, 33, 0.15);
+        .dashboard {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 24px;
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .brand-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            background: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
         }
 
         h1 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #031221;
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 900;
-        }
-
-        .saudacao {
-            background: #f0f4f8;
-            color: #031221;
-            padding: 20px;
-            border: 2px solid #031221;
-            text-align: center;
-            margin-bottom: 25px;
-            box-shadow: 4px 4px 0px rgba(3, 18, 33, 0.1);
-        }
-
-        .saudacao p {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #1a3c5a;
+            letter-spacing: -0.025em;
         }
 
-        .saudacao h2 {
-            margin-top: 5px;
-            font-size: 1.8rem;
-            font-weight: 800;
+        .welcome-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #a855f7 100%);
+            padding: 24px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .inputs {
+        .welcome-card::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .welcome-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .stat-icon {
+            color: var(--primary);
+        }
+
+        .operations-section {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 24px;
         }
 
-        .inputs input {
-            padding: 15px;
-            border: 2px solid #031221;
-            background: #ffffff;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #031221;
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .input-field {
+            position: relative;
+        }
+
+        .input-field i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            width: 18px;
+            height: 18px;
+        }
+
+        input {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            padding: 14px 14px 14px 48px;
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 0.95rem;
             transition: all 0.2s;
         }
 
-        .inputs input::placeholder {
-            color: #7b93a8;
-            font-weight: 600;
-        }
-
-        .inputs input:focus {
+        input:focus {
             outline: none;
-            background: #e8eef3;
-            box-shadow: 4px 4px 0px rgba(3, 18, 33, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
 
-        .acoes {
+        .actions-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 12px;
         }
 
-        .botao {
-            background: #ffffff;
-            border: 2px solid #031221;
-            color: #031221;
-            padding: 16px;
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
             transition: all 0.2s;
-            box-shadow: 4px 4px 0px rgba(3, 18, 33, 0.2);
         }
 
-        .botao:hover {
-            background: #031221;
-            color: #ffffff;
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px rgba(3, 18, 33, 0.2);
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            grid-column: span 2;
         }
 
-        .botao:active {
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px rgba(3, 18, 33, 0.2);
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--text-muted);
         }
 
         #resultado {
-            margin-top: 25px;
-            background: #f0f4f8;
-            padding: 20px;
-            border: 2px solid #031221;
-            box-shadow: 4px 4px 0px rgba(3, 18, 33, 0.1);
-            color: #031221;
-            font-weight: 700;
-            line-height: 1.6;
+            margin-top: 8px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-    </style>
+        .empty-state {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
 
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="dashboard">
+        <section class="brand-section">
+            <div>
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i data-lucide="landmark"></i>
+                    </div>
+                    <h1>Gabio Bank</h1>
+                </div>
 
-    <div class="container">
+                <div class="welcome-card">
+                    <h2>Olá, Correntista!</h2>
+                    <p>Gerencie suas finanças com segurança e agilidade no Gabio Bank.</p>
+                </div>
 
-        <h1>Gabio Bank</h1>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i data-lucide="shield-check"></i></div>
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--text-muted)">Segurança</p>
+                            <p style="font-size: 0.875rem; font-weight: 600">Protocolo GBTP v1.0</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i data-lucide="zap"></i></div>
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--text-muted)">Status</p>
+                            <p style="font-size: 0.875rem; font-weight: 600">Conectado ao Servidor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 40px;">
+                &copy; 2026 Gabio Bank Digital. Todos os direitos reservados.
+            </p>
+        </section>
 
-        <div class="saudacao">
-            <p>Bem-vindo de volta</p>
-        </div>
+        <section class="operations-section">
+            <div class="input-group">
+                <div class="input-field">
+                    <i data-lucide="user"></i>
+                    <input type="text" id="accountId" placeholder="ID da Conta Origem">
+                </div>
+                <div class="input-field">
+                    <i data-lucide="users"></i>
+                    <input type="text" id="toAccountId" placeholder="ID da Conta Destino (Transferência)">
+                </div>
+                <div class="input-field">
+                    <i data-lucide="dollar-sign"></i>
+                    <input type="number" id="value" placeholder="Valor da Operação">
+                </div>
+            </div>
 
-        <div class="inputs">
+            <div class="actions-grid">
+                <button id="btnSaldo" class="btn btn-primary">
+                    <i data-lucide="wallet"></i> Consultar Saldo
+                </button>
+                <button id="btnDeposito" class="btn btn-secondary">
+                    <i data-lucide="arrow-down-circle"></i> Depósito
+                </button>
+                <button id="btnSaque" class="btn btn-secondary">
+                    <i data-lucide="arrow-up-circle"></i> Saque
+                </button>
+                <button id="btnTransferencia" class="btn btn-secondary" style="grid-column: span 2;">
+                    <i data-lucide="send"></i> Realizar Transferência
+                </button>
+            </div>
 
-            <input
-                type="text"
-                id="accountId"
-                placeholder="Conta origem"
-            >
+            <div id="resultado">
+                <div class="empty-state">
+                    <i data-lucide="activity" style="width: 32px; height: 32px; opacity: 0.5"></i>
+                    <p>Aguardando sua próxima operação...</p>
+                </div>
+            </div>
+        </section>
+    </div>
 
-            <input
-                type="text"
-                id="toAccountId"
-                placeholder="Conta destino"
-            >
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+    <script src="src/GUI/index.ts" type="module"></script>
+</body>
 
-            <input
-                type="number"
-                id="value"
-                placeholder="Valor"
-            >
-
-        </div>
-
-        <div class="acoes">
-
-            <button id="btnSaldo" class="botao">
-                Saldo
-            </button>
-
-            <button id="btnTransferencia" class="botao">
-                Transferência
-            </button>
-
-            <button id="btnSaque" class="botao">
-                Saque
-            </button>
-
-            <button id="btnDeposito" class="botao">
-                Depósito
-            </button>
-
-        </div>
-
-        <div id="resultado">
-
-        </div>
+</html>
 
     </div>
 
